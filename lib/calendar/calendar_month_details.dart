@@ -25,7 +25,7 @@ class CalendarMonthDetails extends StatelessWidget {
     for (var review in reviews) {
       int dateDay = review.date.day;
 
-      calendarDaysReviews[dateDay + numberOfEmptyDays - 1] = CalendarDay(review: review);
+      calendarDaysReviews[dateDay + numberOfEmptyDays - 1] = CalendarDay(review: review, showNote: true);
     }
 
     return calendarDaysReviews;
@@ -36,24 +36,27 @@ class CalendarMonthDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              DateFormat("MMM").format(reviews[0].date),
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            const SizedBox(height: 5),
-            Expanded(
-              flex: 1,
-              child: GridView.count(
-                shrinkWrap: false,
-                crossAxisCount: 7,
-                children: buildCalendarDays(),
-                physics: NeverScrollableScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                DateFormat("MMM").format(reviews[0].date),
+                style: Theme.of(context).textTheme.headline5,
               ),
-            ),
-          ],
+              const SizedBox(height: 5),
+              Expanded(
+                flex: 1,
+                child: GridView.count(
+                  shrinkWrap: false,
+                  crossAxisCount: 7,
+                  children: buildCalendarDays(),
+                  physics: NeverScrollableScrollPhysics(),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

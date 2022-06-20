@@ -5,12 +5,14 @@ import 'package:mood_tracker/models/review.dart';
 class CalendarYear extends StatelessWidget {
   final List<Review> reviews;
   List<List<Review>> calendarMonthsReviews = [[]];
+  late int firstMonth;
   CalendarYear({Key? key, required this.reviews}) : super(key: key) {
+    firstMonth = reviews[0].date.month;
     for (var review in reviews) {
-      if (calendarMonthsReviews.length < review.date.month) {
+      if (calendarMonthsReviews.length < review.date.month - firstMonth) {
         calendarMonthsReviews.add([]);
       }
-      calendarMonthsReviews[review.date.month - 1].add(review);
+      calendarMonthsReviews[review.date.month - firstMonth].add(review);
     }
   }
 

@@ -27,7 +27,10 @@ class CalendarMonth extends StatelessWidget {
     for (var review in reviews) {
       int dateDay = review.date.day;
 
-      calendarDaysReviews[dateDay + numberOfEmptyDays - 1] = CalendarDay(review: review);
+      calendarDaysReviews[dateDay + numberOfEmptyDays - 1] = CalendarDay(
+        review: review,
+        showNote: false,
+      );
     }
 
     return calendarDaysReviews;
@@ -36,7 +39,7 @@ class CalendarMonth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
-      transitionDuration: const Duration(milliseconds: 5000),
+      transitionDuration: const Duration(milliseconds: 500),
       closedColor: Colors.transparent,
       openColor: Colors.transparent,
       middleColor: Colors.transparent,
