@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:mood_tracker/db/reviews_database.dart';
+import 'package:mood_tracker/services/reviews_database.dart';
 import 'package:mood_tracker/models/review.dart';
 
 class AddReview extends StatefulWidget {
