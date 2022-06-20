@@ -1,28 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/calendar/calendar_month.dart';
+import 'package:mood_tracker/models/review.dart';
 
 class CalendarYear extends StatelessWidget {
-  final List<DateTime> dates;
-  List<List<DateTime>> calendarMonths = [[]];
-  CalendarYear({Key? key, required this.dates}) : super(key: key) {
-    for (var date in dates) {
-      if (calendarMonths.length < date.month) {
-        calendarMonths.add([]);
+  final List<Review> reviews;
+  List<List<Review>> calendarMonthsReviews = [[]];
+  CalendarYear({Key? key, required this.reviews}) : super(key: key) {
+    for (var review in reviews) {
+      if (calendarMonthsReviews.length < review.date.month) {
+        calendarMonthsReviews.add([]);
       }
-      calendarMonths[date.month - 1].add(date);
+      calendarMonthsReviews[review.date.month - 1].add(review);
     }
   }
 
   List<Widget> buildMonths() {
-    return calendarMonths.map((month) => CalendarMonth(dates: month)).toList();
+    return calendarMonthsReviews.map((month) => CalendarMonth(reviews: month)).toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      physics: ClampingScrollPhysics(),
-      children: buildMonths(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        children: [
+          Text(
+            '${reviews[0].date.year}',
+            style: Theme.of(context).textTheme.headline4,
+          ),
+          SizedBox(height: 10),
+          Expanded(
+            flex: 1,
+            child: GridView.count(
+              crossAxisSpacing: 15,
+              childAspectRatio: 0.85,
+              crossAxisCount: 2,
+              physics: ClampingScrollPhysics(),
+              children: buildMonths(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
