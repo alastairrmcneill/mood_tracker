@@ -3,21 +3,34 @@ import 'package:mood_tracker/calendar/calendar_month.dart';
 import 'package:mood_tracker/models/review.dart';
 
 class CalendarYear extends StatelessWidget {
+  final int year;
   final List<Review> reviews;
-  List<List<Review>> calendarMonthsReviews = [[]];
+  List<List<Review>> calendarMonthsReviews = [for (var i = 0; i <= 11; i++) []];
   late int firstMonth;
-  CalendarYear({Key? key, required this.reviews}) : super(key: key) {
-    firstMonth = reviews[0].date.month;
+  CalendarYear({Key? key, required this.reviews, required this.year}) : super(key: key) {
+    // firstMonth = reviews[0].date.month;
     for (var review in reviews) {
-      if (calendarMonthsReviews.length < review.date.month - firstMonth) {
-        calendarMonthsReviews.add([]);
-      }
-      calendarMonthsReviews[review.date.month - firstMonth].add(review);
+      // if (calendarMonthsReviews.length <= review.date.month - firstMonth) {
+      //   for (int i = 0; i < review.date.month - firstMonth; i++) {
+      //     calendarMonthsReviews.add([]);
+      //   } // create as many columns as needed
+      // }
+      calendarMonthsReviews[review.date.month - 1].add(review);
     }
   }
 
   List<Widget> buildMonths() {
-    return calendarMonthsReviews.map((month) => CalendarMonth(reviews: month)).toList();
+    List<Widget> months = [];
+
+    for (var i = 0; i < calendarMonthsReviews.length; i++) {
+      months.add(CalendarMonth(reviews: calendarMonthsReviews[i], year: year, month: i + 1));
+    }
+    // return calendarMonthsReviews.map((month) => CalendarMonth(reviews: month, month: 1)).toList();
+
+    if (DateTime.now().year == year) {
+      months.length = months.length - (12 - DateTime.now().month);
+    }
+    return months;
   }
 
   @override
@@ -27,7 +40,7 @@ class CalendarYear extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            '${reviews[0].date.year}',
+            '$year',
             style: Theme.of(context).textTheme.headline4,
           ),
           SizedBox(height: 10),

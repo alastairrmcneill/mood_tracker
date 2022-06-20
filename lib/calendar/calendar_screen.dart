@@ -55,7 +55,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   List<Widget> buildYears() {
-    return calendarYearsReviews.map((year) => CalendarYear(reviews: year)).toList();
+    List<Widget> years = [];
+
+    for (var i = 0; i < calendarYearsReviews.length; i++) {
+      years.add(CalendarYear(reviews: calendarYearsReviews[i], year: calendarYearsReviews[i][0].date.year));
+    }
+    // return calendarYearsReviews.map((year) => CalendarYear(reviews: year)).toList();
+    return years;
   }
 
   @override

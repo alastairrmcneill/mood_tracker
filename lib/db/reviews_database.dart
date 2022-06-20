@@ -11,7 +11,7 @@ class ReviewsDatabase {
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await _initDB('reviews2.db');
+    _database = await _initDB('reviews.db');
     return _database!;
   }
 
