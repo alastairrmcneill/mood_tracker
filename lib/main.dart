@@ -1,8 +1,22 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mood_tracker/calendar/calendar_screen.dart';
 import 'package:mood_tracker/theme.dart';
 
 void main() {
+  AwesomeNotifications().initialize(
+    'resource://drawable/app_icon',
+    [
+      NotificationChannel(
+        channelKey: 'basic_channel',
+        channelName: 'Basic Notifications',
+        channelDescription: 'Basic Notificataion Description',
+        defaultColor: Colors.red,
+        importance: NotificationImportance.High,
+      ),
+    ],
+  );
   runApp(const MyApp());
 }
 
