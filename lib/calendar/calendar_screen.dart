@@ -33,6 +33,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
     });
+    createScheduledNotificiation();
 
     // Get Reviews
     refreshReviews();
@@ -122,6 +123,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          createScheduledNotificiation();
           await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => AddReview(todayComplete: todayComplete)),
           );

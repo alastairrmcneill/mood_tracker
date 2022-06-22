@@ -15,6 +15,14 @@ void main() {
         defaultColor: Colors.red,
         importance: NotificationImportance.High,
       ),
+      NotificationChannel(
+        channelKey: 'scheduled_channel',
+        channelName: 'Scheduled Notifications',
+        channelDescription: 'Scheduled Notificataion Description',
+        defaultColor: Colors.red,
+        locked: true,
+        importance: NotificationImportance.High,
+      ),
     ],
   );
   runApp(const MyApp());
