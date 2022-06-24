@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/calendar/calendar_screen.dart';
+import 'package:mood_tracker/onbaording/onboarding_intro.dart';
+import 'package:mood_tracker/onbaording/onboarding_page.dart';
+import 'package:mood_tracker/services/notifications.dart';
+import 'package:mood_tracker/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -23,13 +27,15 @@ class _OboardingScreenState extends State<OnboardingScreen> {
           physics: const ClampingScrollPhysics(),
           onPageChanged: (index) {
             setState(() {
-              isLastPage = index == 2;
+              isLastPage = index == 4;
             });
           },
-          children: [
-            Container(color: Colors.blue, child: Center(child: Text('Page 1'))),
-            Container(color: Colors.red, child: Center(child: Text('Page 2'))),
-            Container(color: Colors.green, child: Center(child: Text('Page 3'))),
+          children: const [
+            OnboardingIntro(),
+            OnboardingPage(text: 'Add a review with a rating and a note', imagePath: 'assets/Page0.png'),
+            OnboardingPage(text: 'Review your year as a whole to see trends', imagePath: 'assets/Page1.png'),
+            OnboardingPage(text: 'Zoom in to see a specific month. Click the days marked with a dot', imagePath: 'assets/Page2.png'),
+            OnboardingPage(text: 'Read your note from that day as reminder', imagePath: 'assets/Page3.png'),
           ],
         ),
       ),
@@ -38,14 +44,15 @@ class _OboardingScreenState extends State<OnboardingScreen> {
               onPressed: () async {
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const CalendarScreen()));
                 final prefs = await SharedPreferences.getInstance();
-                prefs.setBool('showHome', true);
+                // prefs.setBool('showHome', true);
+                createScheduledNotificiation();
               },
               child: const Text('Get Started'),
               style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0),
                   ),
-                  minimumSize: Size.fromHeight(80)),
+                  minimumSize: const Size.fromHeight(80)),
             )
           : Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -60,10 +67,10 @@ class _OboardingScreenState extends State<OnboardingScreen> {
                       child: const Text('Skip')),
                   SmoothPageIndicator(
                     controller: _pageController,
-                    count: 3,
-                    effect: const WormEffect(
-                      activeDotColor: Color(0xFFeecac4),
-                      dotColor: Color(0xFF4a4b53),
+                    count: 5,
+                    effect: WormEffect(
+                      activeDotColor: MyColors.dotOn,
+                      dotColor: MyColors.dotOff,
                       dotHeight: 6,
                       dotWidth: 6,
                     ),

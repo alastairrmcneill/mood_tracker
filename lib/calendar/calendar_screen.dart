@@ -8,6 +8,7 @@ import 'package:mood_tracker/services/reviews_database.dart';
 import 'package:mood_tracker/models/review.dart';
 import 'package:mood_tracker/review/add_review.dart';
 import 'package:mood_tracker/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -124,7 +125,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          createScheduledNotificiation();
           await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => AddReview(todayComplete: todayComplete)),
           );

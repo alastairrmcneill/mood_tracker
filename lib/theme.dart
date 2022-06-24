@@ -11,6 +11,7 @@ class CustomTheme {
       toggleButtonsTheme: ToggleButtonsThemeData(
         color: MyColors.darkTextColor,
       ),
+      textButtonTheme: TextButtonThemeData(style: ButtonStyle(foregroundColor: MaterialStateProperty.all<Color>(MyColors.rating5))),
       floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: MyColors.rating5),
       textTheme: TextTheme(
         headline4: TextStyle(
@@ -39,5 +40,5 @@ class MyColors {
   static List<Color> ratingColors = [rating1, rating2, rating3, rating4, rating5, rating6];
 
   static Color dotOff = const Color(0xFF4a4b53);
-  static Color dotOn = const Color(0xFFeecac4);
+  static Color dotOn = rating5;
 }
