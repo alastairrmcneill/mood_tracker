@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/models/review.dart';
+import 'package:mood_tracker/theme.dart';
 import 'package:mood_tracker/widgets/custom_dialog_box.dart';
 
 class CalendarDay extends StatelessWidget {
   final bool showNote;
   final Review review;
-  final List<Color> colors = const [
-    Color(0xffff5999),
-    Color(0xFFff70a6),
-    Color(0xFFff70a6),
-    Color(0xff3daeb4),
-    Color(0xFF109da4),
-    Color(0xFF0e838a),
-  ];
+
   late Color color;
   CalendarDay({Key? key, required this.review, required this.showNote}) {
-    color = colors[review.rating - 1];
+    color = MyColors.ratingColors[review.rating - 1];
   }
 
   @override
@@ -23,7 +17,7 @@ class CalendarDay extends StatelessWidget {
     return GestureDetector(
       onTap: showNote && review.note != ''
           ? () async {
-              showAlertDialog(context: context, title: 'Note', message: review.note);
+              showAlertDialog(context: context, review: review);
             }
           : null,
       child: Container(

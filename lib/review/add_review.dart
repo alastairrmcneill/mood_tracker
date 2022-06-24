@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:mood_tracker/services/reviews_database.dart';
 import 'package:mood_tracker/models/review.dart';
+import 'package:mood_tracker/theme.dart';
+import 'package:mood_tracker/widgets/rating_icons.dart';
 
 class AddReview extends StatefulWidget {
   final bool todayComplete;
@@ -13,7 +15,7 @@ class AddReview extends StatefulWidget {
 }
 
 class _AddReviewState extends State<AddReview> {
-  List<bool> _selections = [false, false, false, false, false];
+  List<bool> _selections = [false, false, false, false, false, false];
   final TextEditingController _textEditingController = TextEditingController();
 
   String getDayOfMonthSuffix(int dayNum) {
@@ -39,11 +41,12 @@ class _AddReviewState extends State<AddReview> {
 
   List<Widget> buildButtons() {
     return [
-      _selections[0] ? Icon(FontAwesomeIcons.solidFaceSadTear) : Icon(FontAwesomeIcons.faceSadTear),
-      _selections[1] ? Icon(FontAwesomeIcons.solidFaceFrown) : Icon(FontAwesomeIcons.faceFrown),
-      _selections[2] ? Icon(FontAwesomeIcons.solidFaceMeh) : Icon(FontAwesomeIcons.faceMeh),
-      _selections[3] ? Icon(FontAwesomeIcons.solidFaceSmile) : Icon(FontAwesomeIcons.faceSmile),
-      _selections[4] ? Icon(FontAwesomeIcons.solidFaceLaughBeam) : Icon(FontAwesomeIcons.faceLaughBeam),
+      _selections[0] ? RatingIcons.icon1Solid : RatingIcons.icon1,
+      _selections[1] ? RatingIcons.icon2Solid : RatingIcons.icon2,
+      _selections[2] ? RatingIcons.icon3Solid : RatingIcons.icon3,
+      _selections[3] ? RatingIcons.icon4Solid : RatingIcons.icon4,
+      _selections[4] ? RatingIcons.icon5Solid : RatingIcons.icon5,
+      _selections[5] ? RatingIcons.icon6Solid : RatingIcons.icon6,
     ];
   }
 
@@ -76,16 +79,23 @@ class _AddReviewState extends State<AddReview> {
         ],
       ),
       body: widget.todayComplete
-          ? Center(child: Text('You have already done today!'))
+          ? Center(
+              child: Text(
+                'You have already done today!',
+                style: Theme.of(context).textTheme.headline5,
+              ),
+            )
           : Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 20),
                   Text(
                     'How did you feel today?',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.headline5!.copyWith(fontSize: 20),
                   ),
+                  const SizedBox(height: 10),
                   ToggleButtons(
                     children: buildButtons(),
                     isSelected: _selections,
@@ -107,7 +117,20 @@ class _AddReviewState extends State<AddReview> {
                   const SizedBox(height: 30),
                   TextFormField(
                     controller: _textEditingController,
-                    decoration: InputDecoration(labelText: 'What happened today'),
+                    decoration: InputDecoration(
+                      labelText: 'What happened today',
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          color: MyColors.rating5,
+                        ),
+                      ),
+                      labelStyle: TextStyle(color: MyColors.rating5),
+                    ),
+                    minLines: 3,
+                    maxLines: 10,
+                    cursorColor: MyColors.rating5,
+                    style: Theme.of(context).textTheme.headline5!.copyWith(fontSize: 16),
                   ),
                 ],
               ),

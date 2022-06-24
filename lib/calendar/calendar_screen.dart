@@ -7,6 +7,7 @@ import 'package:mood_tracker/services/notifications.dart';
 import 'package:mood_tracker/services/reviews_database.dart';
 import 'package:mood_tracker/models/review.dart';
 import 'package:mood_tracker/review/add_review.dart';
+import 'package:mood_tracker/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -101,7 +102,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.only(bottom: 10, top: 10),
                         child: AnimatedSmoothIndicator(
                           activeIndex: _pageIndex,
                           count: calendarYearsReviews.length,
@@ -110,9 +111,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                               _pageIndex = index;
                             });
                           },
-                          effect: const WormEffect(
-                            activeDotColor: Color(0xFFeecac4),
-                            dotColor: Color(0xFF4a4b53),
+                          effect: WormEffect(
+                            activeDotColor: MyColors.dotOn,
+                            dotColor: MyColors.dotOff,
                             dotHeight: 6,
                             dotWidth: 6,
                           ),

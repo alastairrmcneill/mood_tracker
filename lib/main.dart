@@ -2,9 +2,11 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mood_tracker/calendar/calendar_screen.dart';
+import 'package:mood_tracker/onbaording/onboarding.dart';
 import 'package:mood_tracker/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
   AwesomeNotifications().initialize(
     'resource://drawable/app_icon',
     [
@@ -25,11 +27,15 @@ void main() {
       ),
     ],
   );
-  runApp(const MyApp());
+
+  final prefs = await SharedPreferences.getInstance();
+  final bool showHome = prefs.getBool('showHome') ?? false;
+  runApp(MyApp(showHome: showHome));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool showHome;
+  const MyApp({Key? key, required this.showHome}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -37,7 +43,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.darkTheme,
-      home: CalendarScreen(),
+      home: showHome ? CalendarScreen() : OnboardingScreen(),
     );
   }
 }
