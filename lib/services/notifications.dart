@@ -23,8 +23,8 @@ Future<void> createScheduledNotificiation() async {
     ),
     schedule: NotificationCalendar(
       repeats: true,
-      hour: 20,
-      minute: 0,
+      hour: 10,
+      minute: 29,
       second: 0,
       millisecond: 0,
     ),

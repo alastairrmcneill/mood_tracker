@@ -44,7 +44,7 @@ class _OboardingScreenState extends State<OnboardingScreen> {
               onPressed: () async {
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const CalendarScreen()));
                 final prefs = await SharedPreferences.getInstance();
-                // prefs.setBool('showHome', true);
+                prefs.setBool('showHome', true);
                 createScheduledNotificiation();
               },
               child: const Text('Get Started'),
