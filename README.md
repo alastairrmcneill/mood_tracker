@@ -1,16 +1,9 @@
-# mood_tracker
+# Mood Tracker
 
-A new Flutter project.
+Mood Tracker is an app designed to help improve mental health, helping you focus on what brings you joy and remove the things that bring you down in life. The way this app helps doing that is by logging your mood each day and noting down why you felt like this. Use the calednar overview to see trends across time.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Technology
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This app is build using Dart and the Flutter Framework. The app uses and SQLite to store the responses and Awesome Notifications to notify the user each day.
