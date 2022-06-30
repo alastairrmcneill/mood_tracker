@@ -6,4 +6,10 @@ Mood Tracker is an app designed to help improve mental health, helping you focus
 
 ## Technology
 
-This app is build using Dart and the Flutter Framework. The app uses and SQLite to store the responses and Awesome Notifications to notify the user each day.
+This app is build using Dart and the Flutter Framework. The app uses and SQLite to store the responses and Awesome Notifications to notify the user each day.  
+
+
+## Links  
+Play Store - 
+App Store - https://apps.apple.com/app/id1632182618
+
